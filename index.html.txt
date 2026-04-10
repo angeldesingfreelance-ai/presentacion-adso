@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación ADSO - Proyecto SFC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(90deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 30px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .section {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #3b82f6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #1e40af;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2::before {
+            content: '▸';
+            color: #3b82f6;
+            font-size: 1.2em;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 0.95em;
+            color: #334155;
+        }
+
+        .info-item strong {
+            color: #1e40af;
+            min-width: 100px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #60a5fa;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #1e40af;
+            font-size: 1.1em;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #475569;
+            font-size: 0.95em;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background: #1e40af;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        .bilingual {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .lang-en {
+            color: #64748b;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        @media (max-width: 968px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+
+        .floating-icon {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 8em;
+            right: 20px;
+            top: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="header">
+            <div class="floating-icon">💻</div>
+            <h1>Miguel Angel Giraldo Herrera</h1>
+            <div class="subtitle">"Transformando datos operativos en valor a través de estructuras de software modulares y escalables"</div>
+        </div>
+
+        <div class="content">
+            <!-- Columna Izquierda -->
+            <div class="left-column">
+                <div class="section">
+                    <h2>Información Personal</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Programa:</strong>
+                            <span>ADSO - Análisis y Desarrollo de Software</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Institución:</strong>
+                            <span>SENA - Modalidad Virtual</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Ubicación:</strong>
+                            <span>Medellín, Colombia</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Año:</strong>
+                            <span>2026</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Enfoque del Programa</h2>
+                    <p style="color: #475569; margin-bottom: 15px; font-size: 0.95em;">
+                        Basado en la <strong>Teoría General de Sistemas (TGS)</strong>, viendo organizaciones como sistemas abiertos.
+                    </p>
+                    <ul class="features-list">
+                        <li>Especificación de Requerimientos (RF/RNF)</li>
+                        <li>Integración de Sistemas (Hardware + Software)</li>
+                        <li>Metodologías Ágiles (99.9% disponibilidad)</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Características Técnicas</h2>
+                    <div class="tech-tags">
+                        <span class="tag">IFSF</span>
+                        <span class="tag">JSON</span>
+                        <span class="tag">Roles/Auth</span>
+                        <span class="tag">UI Táctil</span>
+                        <span class="tag">APIs</span>
+                        <span class="tag">QR/RFID</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna Derecha -->
+            <div class="right-column">
+                <div class="section" style="border-left-color: #10b981;">
+                    <h2 style="color: #059669;">Proyecto SFC</h2>
+                    <div class="highlight-box" style="background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border-color: #34d399;">
+                        <p style="color: #065f46; font-weight: 600; margin-bottom: 10px;">Sistema de Control de Combustible</p>
+                        <ul class="features-list">
+                            <li style="color: #065f46;">Automatización de control de combustible</li>
+                            <li style="color: #065f46;">Monitoreo en tiempo real (Homeostasis)</li>
+                            <li style="color: #065f46;">Facturación electrónica DIAN</li>
+                            <li style="color: #065f46;">Inventario diversificado</li>
+                            <li style="color: #065f46;">Fidelización multicanal</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section" style="border-left-color: #f59e0b;">
+                    <h2 style="color: #d97706;">Objetivos Clave</h2>
+                    <div class="bilingual">
+                        <div class="info-item" style="margin-bottom: 8px;">
+                            <span style="color: #92400e; font-weight: 600;">Automatización:</span>
+                            <span class="lang-en">Real-time data capture from dispensers</span>
+                        </div>
+                        <div class="info-item" style="margin-bottom: 8px;">
+                            <span style="color: #92400e; font-weight: 600;">Digitalización:</span>
+                            <span class="lang-en">Electronic billing standards compliance</span>
+                        </div>
+                        <div class="info-item" style="margin-bottom: 8px;">
+                            <span style="color: #92400e; font-weight: 600;">Escalabilidad:</span>
+                            <span class="lang-en">Modular architecture for shop products</span>
+                        </div>
+                        <div class="info-item">
+                            <span style="color: #92400e; font-weight: 600;">Integración:</span>
+                            <span class="lang-en">APIs for loyalty systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            SENA ADSO 2026 | Medellín, Colombia | Transformando operaciones en valor digital
+        </div>
+    </div>
+
+    <script>
+        // Animación de entrada escalonada para las secciones
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, 200 * (index + 1));
+            });
+        });
+    </script>
+</body>
+</html>
